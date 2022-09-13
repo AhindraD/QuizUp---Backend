@@ -1,7 +1,7 @@
 # QuizUp---Backend
-## Fetch URL: https://uber.up.railway.app/
-### Postman Collection JSON (API testing purpose) : https://github.com/AhindraD/UberEats-Backend/blob/master/UberEats.postman_collection.json
-### Postman Screen-Shots : https://github.com/AhindraD/UberEats-Backend/tree/master/images
+## Fetch URL: 
+### Postman Collection JSON (API testing purpose) : 
+### Postman Screen-Shots : 
 <br>
 
 # Endpoints
@@ -12,22 +12,22 @@ These are minimum endpoints needed, feel free to be more creative and add more e
   - `POST /auth/login`
   - `POST /auth/token`
   
-- Restaurants 
-  - `POST /restaurants/add`: Creates new restaurant
+- Quiz
+  - `POST /restaurants/add`: 
   
-  - `GET /restaurants/all`: List all restaurants
+  - `GET /restaurants/all`: 
   
-  - `GET /restaurants/:id`: Details of restaurants with all dishes offered
+  - `GET /restaurants/:id`: 
   
-  - `POST /restuarants/:id/add-dish`: Add new dish for a restaurant
+  - `POST /restuarants/:id/add-dish`: 
   
   - `GET /restaurants/:id/orders`: Get all orders of a restaurant, should be able to filter by passing `?status=pending` etc. (shows all if no filter query passed)
   
   - `GET /restaurants/:id/revenue?start_date=2022-09-08`: Get revenue of a restaurant for given time range. `end_date` default would be `today`'s date
   
-- Orders
-  - `POST /orders/add`: Create new order
-  - `GET /orders/:id`: Get details of any order
+- Other
+  - `POST /orders/add`: 
+  - `GET /orders/:id`: 
   - `POST /orders/:id/update?status=<pending/completed/cancelled>`: Change status of any order by passing the argument in query
 
   <br>
