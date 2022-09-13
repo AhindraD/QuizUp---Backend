@@ -1,4 +1,4 @@
-## Milestone 1 : Backend Endpoints
+## Milestone 1 :All Backend Endpoints
 Estimated time: 8hrs
 ### Part 1
     13 Sept. 2022 
@@ -10,5 +10,5 @@ Estimated time: 8hrs
 Part 1 completed in around 3 hours 30mins.
 
 ### MISC
-23 Jul '21
+21 Sept. 2022
 11.30 - 13.00: Fixed some bugs and UI issues as per the feedback
