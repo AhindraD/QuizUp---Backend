@@ -22,7 +22,7 @@ mongoose.connect(DB_URL, DB_Options)
 
 
 //ALL ROUTES import
-
+const authRouter = require("./Routes/Auth-Route");
 
 
 const app = express();
@@ -43,7 +43,7 @@ app.use(morgan("dev", { stream }));
 
 
 //Routes related USAGE
-
+app.use("/auth", authRouter);
 
 
 app.listen(process.env.PORT || 8000);
