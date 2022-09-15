@@ -22,6 +22,9 @@ const optionSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    deletedAt: {
+        type: Date
     }
 });
 

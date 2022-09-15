@@ -5,7 +5,7 @@ const quizSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    options: [{
+    option: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Option',
     }],
@@ -28,6 +28,9 @@ const quizSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    deletedAt: {
+        type: Date
     },
     imageUrl: {
         type: String

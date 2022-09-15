@@ -5,35 +5,15 @@ const subjectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    cuisine: {
-        type: String,
+    quiz: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quiz',
+    }],
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
     },
-    address: {
-        type: String,
-    },
-    revenue: [
-        {
-            type: Object,
-        }
-    ],
-    dishes: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Dish",
-        }
-    ],
-    orders: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Order",
-        }
-    ],
-    buyers: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        }
-    ],
     createdAt: {
         type: Date,
         default: Date.now

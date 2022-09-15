@@ -1,38 +1,23 @@
 const mongoose = require("mongoose")
 
-const orderSchema = mongoose.Schema({
-    ID: {
+const studentSchema = mongoose.Schema({
+    name: {
         type: String,
-        default: `OrderID${Math.random().toString(36).substring(2, 13) }`,
-        required:true,
+        required: true,
     },
-    desc: {
-        type: String,
-    },
-    price: {
+    score: {
         type: Number,
         required: true,
     },
-    restaurant: {
+    response: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Restaurant',
-        required: true,
-    },
-    buyer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required:true,
-    },
-    orderedAt: {
+        ref: 'Option',
+    }],
+    createdAt: {
         type: Date,
         default: Date.now
-    },
-    status: {
-        type: String,
-        default: "pending",
-        required: true,
     }
 });
 
-const OrderModel = mongoose.model("Order", orderSchema);
-module.exports = OrderModel;
+const StudentModel = mongoose.model("Student", studentSchema);
+module.exports = StudentModel;
