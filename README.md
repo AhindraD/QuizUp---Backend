@@ -1,6 +1,6 @@
 # QuizUp---Backend
-## Fetch URL: 
-### Postman Collection JSON (API testing purpose) : 
+## Fetch URL: https://kahoot.up.railway.app/
+### Postman Collection JSON (API testing purpose) : https://github.com/AhindraD/QuizUp---Backend/blob/master/QuizUp.postman_collection.json
 ### Postman Screen-Shots : 
 <br>
 
