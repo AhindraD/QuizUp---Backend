@@ -21,68 +21,77 @@ const storage = multer.diskStorage(
 
 const upload = multer({ storage: storage });
 
-//SHOW ALL Subjects
+//SHOW all Quiz
 router.get('/all', async (request, response) => {
-    const subject = await SubjectModel.find({})
-        .populate("name", "name")
-        .populate("quiz", "question option student")
+    const quiz = await QuizModel.find({})
+        .populate("question", "question")
+        .populate("option", "answer correct")
         .populate("subject", "name")
+        .populate("owner", "name")
 
-    response.status(200).json(subject);
+    response.status(200).json(quiz);
 });
 
-//SHOW A Subject
+//SHOW a Quiz
 router.get('/:id', async (request, response) => {
-    const subject = await SubjectModel.find({ _id: request.params.id })
-        .populate("name", "name")
-        .populate("quiz", "question option student")
+    const quiz = await QuizModel.find({ _id: request.params.id })
+        .populate("question", "question")
+        .populate("option", "answer correct")
         .populate("subject", "name")
+        .populate("owner", "name")
 
-    response.status(200).json(subject);
+    response.status(200).json(quiz);
 });
 
 
-//CREATE a new Subject
+//Create a Quiz & Add
 router.post('/add', upload.single('image'), async (request, response) => {
-    const { name, owner } = request.body;
+    const { question, option, subject, owner } = request.body;
 
     let uploadedFile = request.file.filename;
     uploadedFile = 'uploads/' + uploadedFile;
     let imageUrl = process.env.BASE_URL + uploadedFile;
     //console.log(process.env.BASE_URL);
-    if (!name || !owner) {
+    console.log(imageUrl);
+    if (!question || !option || !subject || !owner) {
         return response.status(400).send('Input required!');
     }
     //creating document for entered details
-    const newSubject = new SubjectModel({
-        name,
+    const newQuiz = new QuizModel({
+        question,
+        option,
+        subject,
+        owner,
         imageUrl,
     });
     try {
         //saving the doc/order to database collection
-        const saveSubject = await newSubject.save();
-        await UserModel.updateOne({ _id: owner }, {
+        const saveQuiz = await newQuiz.save();
+        await SubjectModel.updateOne({ _id: subject }, {
             $push: {
-                "subject": saveSubject.id,
+                "quiz": saveQuiz.id,
             }
         });
-        response.status(201).send("Subject created with ID: " + saveSubject.id);
+        await UserModel.updateOne({ _id: owner }, {
+            $push: {
+                "quiz": saveQuiz.id,
+            }
+        });
+        response.status(201).send("Quiz created with ID: " + saveQuiz.id);
     } catch (e) {
         response.status(501).send(e.message)
     }
 });
 
-
-//Delete Subject
+//Delete Quiz
 router.delete('/delete/:id', async (request, response) => {
     //console.log(request.params.id);
     try {
-        await StudentModel.deleteOne({ _id: request.params.id });
-        response.status(202).send("Subject DELETED with ID: " + request.params.id);
+        await QuizModel.deleteOne({ _id: request.params.id });
+        response.status(202).send("Quiz DELETED with ID: " + request.params.id);
     } catch (e) {
         response.status(501).send(e.message)
     }
 })
-
 
 module.exports = router;
