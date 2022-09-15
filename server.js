@@ -12,9 +12,7 @@ const rfs = require("rotating-file-stream");
 const DB_URL = process.env.DB_URL;
 const DB_Options = {
     useNewURLParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true
 }
 mongoose.connect(DB_URL, DB_Options)
     .then(() => console.log("Connected to MongoDB"))

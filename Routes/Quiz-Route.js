@@ -48,7 +48,10 @@ router.get('/:id', async (request, response) => {
 router.post('/add', upload.single('image'), async (request, response) => {
     const { question, option, subject, owner } = request.body;
 
-    let uploadedFile = request.file.filename;
+    let uploadedFile = request.file;
+    if (uploadedFile != undefined) {
+        uploadedFile = uploadedFile.filename;
+    }
     uploadedFile = 'uploads/' + uploadedFile;
     let imageUrl = process.env.BASE_URL + uploadedFile;
     //console.log(process.env.BASE_URL);
@@ -86,7 +89,7 @@ router.post('/add', upload.single('image'), async (request, response) => {
                 }
             });
         }
-        
+
         await SubjectModel.updateOne({ _id: subject }, {
             $push: {
                 "quiz": saveQuiz.id,
@@ -98,6 +101,55 @@ router.post('/add', upload.single('image'), async (request, response) => {
             }
         });
         response.status(201).send("Quiz created with ID: " + saveQuiz.id);
+    } catch (e) {
+        response.status(501).send(e.message)
+    }
+});
+
+//EDIT a Quiz 
+router.post('/edit/:id', upload.single('image'), async (request, response) => {
+    const { question, option } = request.body;
+    const quizID = request.params.id;
+    let uploadedFile = request.file;
+    if (uploadedFile != undefined) {
+        uploadedFile = uploadedFile.filename;
+    }
+    uploadedFile = 'uploads/' + uploadedFile;
+    let imageUrl = process.env.BASE_URL + uploadedFile;
+    //console.log(process.env.BASE_URL);
+    //console.log(imageUrl);
+    if (!question && !option) {
+        return response.status(400).send('Input required!');
+    }
+    if (question) {
+        await QuizModel.updateOne({ _id: quizID }, {
+            "question": question,
+        });
+    }
+    if (option && option.length > 0) {
+        await QuizModel.updateOne({ _id: quizID }, {
+            "option": [],
+        });
+    }
+    try {
+        for (let i = 0; i < option.length; i++) {
+            let currOpt = option[i];
+            let answer = currOpt.answer;
+            let correct = currOpt.correct;
+            let quiz = quizID;
+            const newOpt = new OptionModel({
+                answer,
+                correct,
+                quiz
+            });
+            const saveOpt = await newOpt.save();
+            await QuizModel.updateOne({ _id: quizID }, {
+                $push: {
+                    "option": saveOpt.id,
+                }
+            });
+        }
+        response.status(201).send("Quiz updated with ID: " + quizID);
     } catch (e) {
         response.status(501).send(e.message)
     }

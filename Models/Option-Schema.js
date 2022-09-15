@@ -5,10 +5,10 @@ const optionSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    correct: [{
+    correct: {
         type: Boolean,
         required: true,
-    }],
+    },
     quiz: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quiz',

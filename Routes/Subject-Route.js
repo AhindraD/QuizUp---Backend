@@ -26,7 +26,7 @@ router.get('/all', async (request, response) => {
     const subject = await SubjectModel.find({})
         .populate("name", "name")
         .populate("quiz", "question option student")
-        .populate("subject", "name")
+        .populate("owner", "name")
 
     response.status(200).json(subject);
 });
@@ -36,7 +36,7 @@ router.get('/:id', async (request, response) => {
     const subject = await SubjectModel.find({ _id: request.params.id })
         .populate("name", "name")
         .populate("quiz", "question option student")
-        .populate("subject", "name")
+        .populate("owner", "name")
 
     response.status(200).json(subject);
 });
@@ -46,7 +46,10 @@ router.get('/:id', async (request, response) => {
 router.post('/add', upload.single('image'), async (request, response) => {
     const { name, owner } = request.body;
 
-    let uploadedFile = request.file.filename;
+    let uploadedFile = request.file;
+    if (uploadedFile != undefined) {
+        uploadedFile = uploadedFile.filename;
+    }
     uploadedFile = 'uploads/' + uploadedFile;
     let imageUrl = process.env.BASE_URL + uploadedFile;
     //console.log(process.env.BASE_URL);
@@ -56,6 +59,7 @@ router.post('/add', upload.single('image'), async (request, response) => {
     //creating document for entered details
     const newSubject = new SubjectModel({
         name,
+        owner,
         imageUrl,
     });
     try {
