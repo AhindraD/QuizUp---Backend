@@ -6,9 +6,9 @@ Estimated time: 8hrs
     --------------
     15 Sept. 2022
     09:00 - 11:30: Working on the Quiz API all end POINTS
-    12:00 - 02:30: Testing in POstman
+    12:00 - 02:30: Testing in POstman DONE
 
-Milestone 1 completed in around 3 hours 30mins.
+Milestone 1 completed in around 11 hours 00mins.
 
 ### MISC
 21 Sept. 2022

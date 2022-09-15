@@ -10,6 +10,10 @@ const studentSchema = mongoose.Schema({
         default: 0,
         required: true,
     },
+    teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     response: [{
         type: Object,
     }],

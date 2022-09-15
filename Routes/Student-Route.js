@@ -60,6 +60,7 @@ router.post('/:teacherID/join', async (request, response) => {
     }
     const newStudent = new StudentModel({
         name,
+        teacher: request.params.teacherID,
     });
     try {
         //saving the doc/order to database collection

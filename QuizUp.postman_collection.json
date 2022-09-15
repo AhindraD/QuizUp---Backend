@@ -1,0 +1,726 @@
+{
+	"info": {
+		"_postman_id": "e9cfff49-237c-43ed-8c7a-2d93d81be9cb",
+		"name": "QuizUp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22888526"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Ahindra\",\r\n    \"email\":\"ahindra@mail.com\",\r\n    \"password\":\"passcode123\",\r\n    \"confirmPassword\":\"passcode123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogIn",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZmRmYzJmMzhlN2RmM2Q4MDc1ZWE2NyIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MTE1NzkxN30.9FqjDuESMX3KSv3B3gS8sQuf7-LcFs6gD0xiUz8Is3o",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ahindra@mail.com\",\r\n    \"password\": \"passcode123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GenerateAccessToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTliMTVjMjU0OGJhNDAxNDJjNTAwMSIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MjYyODIwNCwiZXhwIjoxNjYzMjU4MjA0fQ.kBoWLHgpoBGDwY2dZqhgKghQ2HIu4OlJ1KL0HHaZEeM\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quiz",
+			"item": [
+				{
+					"name": "Add-Quiz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": \"No of sides in Pentagon?\",\r\n    \"option\": [\r\n        {\r\n            \"answer\": 3,\r\n            \"correct\": false\r\n        },\r\n        {\r\n            \"answer\": 5,\r\n            \"correct\": true\r\n        },\r\n        {\r\n            \"answer\": 7,\r\n            \"correct\": false\r\n        },\r\n        {\r\n            \"answer\": 9,\r\n            \"correct\": false\r\n        }\r\n    ],\r\n    \"subject\": \"6322d2b009f31d8ace43735e\",\r\n    \"owner\": \"6322d07c95b8f96cf73eee8d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/quiz/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit-Quiz",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": \"No of sides in Square?\",\r\n    \"option\": [\r\n        {\r\n            \"answer\": 3,\r\n            \"correct\": false\r\n        },\r\n        {\r\n            \"answer\": 5,\r\n            \"correct\": false\r\n        },\r\n        {\r\n            \"answer\": 7,\r\n            \"correct\": false\r\n        },\r\n        {\r\n            \"answer\": 4,\r\n            \"correct\": true\r\n        }\r\n    ],\r\n    \"subject\": \"6322d2b009f31d8ace43735e\",\r\n    \"owner\": \"6322d07c95b8f96cf73eee8d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/quiz/edit/6322d6e096a8a3bfdc45db40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"edit",
+								"6322d6e096a8a3bfdc45db40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show-Quiz",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/quiz/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show-One",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/quiz/6322d6e096a8a3bfdc45db40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"6322d6e096a8a3bfdc45db40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEL-One",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/quiz/delete/6322d6e096a8a3bfdc45db40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"quiz",
+								"delete",
+								"6322d6e096a8a3bfdc45db40"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "Add-Subject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Programming\",\r\n    \"owner\":\"6322d07c95b8f96cf73eee8d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/subject/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"subject",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show-Subject",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/subject/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"subject",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show-One",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/subject/6322d7da96a8a3bfdc45db80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"subject",
+								"6322d7da96a8a3bfdc45db80"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DEL-One",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/subject/delete/6322d7da96a8a3bfdc45db80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"subject",
+								"delete",
+								"6322d7da96a8a3bfdc45db80"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "All-Quiz-STUDENT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/quiz/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"quiz",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One-Quiz-STUDENT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/quiz/6322d6e096a8a3bfdc45db40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"quiz",
+								"6322d6e096a8a3bfdc45db40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "One-Subject-STUDENT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/subject/6322d7da96a8a3bfdc45db80",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"subject",
+								"6322d7da96a8a3bfdc45db80"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All-Subject-STUDENT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/subject/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"subject",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Join",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"John\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/6322d07c95b8f96cf73eee8d/join",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"6322d07c95b8f96cf73eee8d",
+								"join"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Answer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"student\":\"6322de1ccafa000e300ba2df\",\r\n    \"option\":\"6322d73596a8a3bfdc45db5a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/student/answer/6322d73596a8a3bfdc45db58",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"student",
+								"answer",
+								"6322d73596a8a3bfdc45db58"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "allStudents",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMjJkMDdjOTViOGY5NmNmNzNlZWU4ZCIsImVtYWlsIjoiYWhpbmRyYUBtYWlsLmNvbSIsImlhdCI6MTY2MzIyNTk5MywiZXhwIjoxNjYzMzEyMzkzfQ.a3dv4LKTY4d09f2sQmN-52y_FHrXRmK1vLNBYPgAfiw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"teacherID\":\"6322d07c95b8f96cf73eee8d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/teacher/allStudents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"teacher",
+								"allStudents"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

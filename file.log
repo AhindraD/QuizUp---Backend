@@ -46,3 +46,10 @@
 [0mPOST /student/answer/6322d73596a8a3bfdc45db58 [32m200[0m 64.473 ms - 178[0m
 [0mPOST /student/answer/6322d73596a8a3bfdc45db58 [32m200[0m 61.666 ms - 4[0m
 [0mPOST /student/answer/6322d73596a8a3bfdc45db58 [32m201[0m 216.977 ms - 36[0m
+[0mPOST /student/6322d07c95b8f96cf73eee8d/join [32m201[0m 123.007 ms - 49[0m
+[0mPOST /student/6322d07c95b8f96cf73eee8d/join [32m201[0m 124.500 ms - 49[0m
+[0mGET /teacher/allStudents [33m400[0m 4.485 ms - 15[0m
+[0mGET /teacher/allStudents [33m400[0m 2.984 ms - 15[0m
+[0mGET /teacher/allStudents [32m200[0m 57.225 ms - 593[0m
+[0mGET /teacher/allStudents [32m200[0m 71.911 ms - 157[0m
+[0mGET /teacher/allStudents [32m200[0m 106.693 ms - 182[0m
