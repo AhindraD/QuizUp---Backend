@@ -1,13 +1,13 @@
 ## Milestone 1 :All Backend Endpoints
 Estimated time: 8hrs
-### Part 1
+### LOGs
     13 Sept. 2022 
-    09:30 - 15:00: Working on the login and signup API : AUTH
+    09:30 - 15:30: Working on the login and signup API : AUTH
     --------------
     15 Sept. 2022
-    09:00 - 17:30: Working on the Quiz API
+    09:00 - 11:30: Working on the Quiz API all end POINTS
 
-Part 1 completed in around 3 hours 30mins.
+Milestone 1 completed in around 3 hours 30mins.
 
 ### MISC
 21 Sept. 2022
