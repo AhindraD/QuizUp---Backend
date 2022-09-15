@@ -6,7 +6,19 @@ Estimated time: 8hrs
     --------------
     15 Sept. 2022
     09:00 - 11:30: Working on the Quiz API all end POINTS
-    12:00 - 02:30: Testing in POstman DONE
+    12:00 - 14:30: Testing in Postman DONE
+
+Milestone 1 completed in around 11 hours 00mins.(+3)
+
+## Milestone 2 :Frontend setup
+Estimated time: hrs
+### LOGs
+    15 Sept. 2022 
+    15:00 - 17:30: SignUp/Login page
+    --------------
+    15 Sept. 2022
+    09:00 - 11:30: 
+    12:00 - 02:30: 
 
 Milestone 1 completed in around 11 hours 00mins.
 
