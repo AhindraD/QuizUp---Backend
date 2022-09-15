@@ -3,9 +3,9 @@ Estimated time: 8hrs
 ### Part 1
     13 Sept. 2022 
     09:30 - 15:00: Working on the login and signup API : AUTH
-    15:30 - 17:30: Working on the Quiz API
     --------------
-    14 Sept. 2022
+    15 Sept. 2022
+    09:00 - 17:30: Working on the Quiz API
 
 Part 1 completed in around 3 hours 30mins.
 

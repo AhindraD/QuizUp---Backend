@@ -17,6 +17,14 @@ const USER_SCHEMA = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Quiz",
     }],
+    subject: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Subject",
+    }],
+    student: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Student",
+    }],
     createdAt: {
         type: Date,
         default: Date.now,
