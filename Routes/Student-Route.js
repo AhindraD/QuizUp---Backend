@@ -85,3 +85,6 @@ router.post('/answer/:quizID', async (request, response) => {
         response.status(501).send(e.message)
     }
 });
+
+
+module.exports = router;

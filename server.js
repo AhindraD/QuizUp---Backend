@@ -24,8 +24,8 @@ mongoose.connect(DB_URL, DB_Options)
 //ALL ROUTES import
 const authRouter = require("./Routes/Auth-Route");
 const quizRouter = require("./Routes/Quiz-Route");
-const subjectRouter=require("./Routes/Subject-Route");
-const subjectRouter=require("./Routes/Subject-Route");
+const subjectRouter = require("./Routes/Subject-Route");
+const studentRouter = require("./Routes/Student-Route");
 
 const app = express();
 //MIddleWares
@@ -46,6 +46,7 @@ app.use(morgan("dev", { stream }));
 
 //Routes related USAGE
 app.use("/auth", authRouter);
+app.use("/student", studentRouter);
 //custom Auth middleware for data protection
 app.use("/quiz", authenticateRequest, quizRouter);
 app.use("/subject", authenticateRequest, subjectRouter);
