@@ -59,14 +59,34 @@ router.post('/add', upload.single('image'), async (request, response) => {
     //creating document for entered details
     const newQuiz = new QuizModel({
         question,
-        option,
+        option: [],
         subject,
         owner,
         imageUrl,
     });
     try {
-        //saving the doc/order to database collection
+        //saving the QUIZ to database collection
         const saveQuiz = await newQuiz.save();
+        //ADDING THE OPTIONS
+        for (let i = 0; i < option.length; i++) {
+            let currOpt = option[i];
+            let answer = currOpt.answer;
+            let correct = currOpt.correct;
+            let quiz = saveQuiz.id
+            const newOpt = new OptionModel({
+                answer,
+                correct,
+                quiz,
+                owner,
+            });
+            const saveOpt = await newOpt.save();
+            await QuizModel.updateOne({ _id: saveQuiz.id }, {
+                $push: {
+                    "option": saveOpt.id,
+                }
+            });
+        }
+        
         await SubjectModel.updateOne({ _id: subject }, {
             $push: {
                 "quiz": saveQuiz.id,
