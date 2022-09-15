@@ -11,8 +11,7 @@ const studentSchema = mongoose.Schema({
         required: true,
     },
     response: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Option',
+        type: Object,
     }],
     createdAt: {
         type: Date,

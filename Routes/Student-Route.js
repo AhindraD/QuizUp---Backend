@@ -57,23 +57,30 @@ router.post('/:teacherID/join', async (request, response) => {
 
 //Give Answer
 router.post('/answer/:quizID', async (request, response) => {
-    const { student, quiz, option } = request.body;
+    const { student, option } = request.body;
     //creating document for entered details
     if (!student || !quiz || !option) {
         return response.status(400).send('Input required!');
     }
+    let ifCorrect = await OptionModel.find({ _id: option }).correct;
+    const chosenOpt = new OptionModel({
+        answer: option,
+        correct: ifCorrect,
+        quiz: request.params.quizID
+    });
     try {
         await StudentModel.updateOne({ _id: student }, {
             $push: {
-                "response": saveQuiz.id,
+                "response": chosenOpt,
             }
         });
-        await UserModel.updateOne({ _id: owner }, {
-            $push: {
-                "quiz": saveQuiz.id,
-            }
-        });
-        response.status(201).send("Quiz created with ID: " + saveQuiz.id);
+        if (ifCorrect) {
+            let currPoint = await StudentModel.find({ _id: student }).score;
+            await StudentModel.updateOne({ _id: student }, {
+                "score": score + 1,
+            });
+        }
+        response.status(201).send("Response received is correct? - " + ifCorrect);
     } catch (e) {
         response.status(501).send(e.message)
     }
