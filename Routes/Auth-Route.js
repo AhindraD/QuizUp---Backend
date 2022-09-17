@@ -33,7 +33,16 @@ router.post("/signup", async (request, response) => {
     })
     try {//Adding new user to Database
         const saveUser = await newUser.save();
-        return response.status(201).json({ user: saveUser });
+        const payload = {
+            id: saveUser.id,
+            email,
+        }
+        const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION_TIME });
+
+        const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION_TIME });
+        REFRESH_TOKENS.push(refreshToken);
+
+        return response.status(201).json({ saveUser, accessToken, refreshToken });
     } catch (error) {
         return response.status(501).send("ERROR: " + error.message);
     }
