@@ -55,7 +55,7 @@ router.post("/login", async (request, response) => {
     //Hashed Password compare
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
     if (!isPasswordCorrect) {
-        return response.status(401).send("Incorrect Password! try again...");
+        return response.status(401).json({ error: "Incorrect Password! try again..." });
     }
     const payload = {
         id: existingUser.id,
