@@ -10,14 +10,14 @@ router.post("/signup", async (request, response) => {
     const { name, email, password, confirmPassword } = request.body;
     //Input Validation
     if (!name || !email || !password || !confirmPassword) {
-        return response.status(400).send("All fields are REQUIRED!");
+        return response.status(400).json({ error: "All fields are REQUIRED!"});
     }
     if (password !== confirmPassword) {
-        return response.status(400).send("Password & ConfirmPassword is not same!");
+        return response.status(400).json({ error: "Password & ConfirmPassword is not same!"});
     }
     const existingUser = await UserModel.findOne({ email: email });
     if (existingUser != null) {
-        return response.status(409).send("Email already exists!");
+        return response.status(409).json({ error: "Email already exists!"});
     }
 
     //DATA_PROCESS
@@ -45,11 +45,11 @@ router.post("/login", async (request, response) => {
     const { email, password } = request.body;
     //Input Validation
     if (!email || !password) {
-        return response.status(400).send("All fields are REQUIRED!");
+        return response.status(400).json({ error: "All fields are REQUIRED!"});
     }
     const existingUser = await UserModel.findOne({ email: email });
     if (existingUser == null) {
-        return response.status(404).send("Email doesn't exist!");
+        return response.status(404).json({ error: "Email doesn't exist!"});
     }
 
     //Hashed Password compare
@@ -74,7 +74,7 @@ router.post("/token", async (request, response) => {
     //Veryfying token received
     const refreshToken = request.body.token;
     if (!refreshToken) {
-        return response.status(401).send("Please provide token!")
+        return response.status(401).json({ error: "Please provide token!"})
     }
     // if (!REFRESH_TOKENS.includes(refreshToken)) {//NO_NEED: done by jwt.verify
     //     return response.status(403).send("Invalid token provided!");
