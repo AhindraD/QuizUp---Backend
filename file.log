@@ -53,3 +53,13 @@
 [0mGET /teacher/allStudents [32m200[0m 57.225 ms - 593[0m
 [0mGET /teacher/allStudents [32m200[0m 71.911 ms - 157[0m
 [0mGET /teacher/allStudents [32m200[0m 106.693 ms - 182[0m
+[0mPOST /auth/login [32m202[0m 141.267 ms - 1049[0m
+[0mGET /subject/all [32m200[0m 116.241 ms - 859[0m
+[0mGET /subject/all [32m200[0m 105.530 ms - 859[0m
+[0mGET /subject/all [32m200[0m 110.613 ms - 859[0m
+[0mGET /subject/6322d7da96a8a3bfdc45db80 [32m200[0m 76.936 ms - 227[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 82.604 ms - 633[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 104.250 ms - 977[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 117.873 ms - 633[0m
+[0mGET /quiz/6322d6e096a8a3bfdc45db40 [32m200[0m 105.298 ms - 526[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 152.637 ms - 2199[0m

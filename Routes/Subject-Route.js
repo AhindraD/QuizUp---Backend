@@ -35,7 +35,12 @@ router.get('/all', async (request, response) => {
 router.get('/:id', async (request, response) => {
     const subject = await SubjectModel.find({ _id: request.params.id })
         .populate("name", "name")
-        .populate("quiz", "question option student")
+        .populate({
+            path: "quiz", // populate quiz
+            populate: {
+                path: "option" // in quiz, populate ptions
+            }
+        })
         .populate("owner", "name")
 
     response.status(200).json(subject);
