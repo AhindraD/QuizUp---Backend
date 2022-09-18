@@ -11,17 +11,26 @@ Estimated time: 8hrs
 Milestone 1 completed in around 11 hours 00mins.(+3)
 
 ## Milestone 2 :Frontend setup
-Estimated time: hrs
+Estimated time: 36hrs
 ### LOGs
     15 Sept. 2022 
     15:00 - 17:30: SignUp/Login page
     --------------
-    15 Sept. 2022
-    09:00 - 11:30: 
-    12:00 - 02:30: 
+
+    17 Sept. 2022 
+    13:00 - 17:30: SignUp/Login with AXIOS done!
+    --------------
+
+    18 Sept. 2022
+    16:00 - 23:00 : Adding templates page + started quiz edit/add page
+
+    --------------
+    19 Sept. 2022
+    12:00 - 03:30: finshed Quiz edit/add/delete page
+    03:30 - 8:30 : Working on socket Backend & Frontend
 
 Milestone 1 completed in around 11 hours 00mins.
 
 ### MISC
-21 Sept. 2022
+19 Sept. 2022
 11.30 - 13.00: Fixed some bugs and UI issues as per the feedback
