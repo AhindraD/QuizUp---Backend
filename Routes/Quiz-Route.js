@@ -57,7 +57,7 @@ router.post('/add', upload.single('image'), async (request, response) => {
     //console.log(process.env.BASE_URL);
     console.log(imageUrl);
     if (!question || !option || !subject || !owner) {
-        return response.status(400).send('Input required!');
+        return response.status(400).json({ error: 'Input required!' });
     }
     //creating document for entered details
     const newQuiz = new QuizModel({
@@ -100,9 +100,9 @@ router.post('/add', upload.single('image'), async (request, response) => {
                 "quiz": saveQuiz.id,
             }
         });
-        response.status(201).send("Quiz created with ID: " + saveQuiz.id);
+        response.status(201).json({ quiz: saveQuiz });
     } catch (e) {
-        response.status(501).send(e.message)
+        response.status(501).json({ error: e.message });
     }
 });
 
@@ -119,7 +119,7 @@ router.post('/edit/:id', upload.single('image'), async (request, response) => {
     //console.log(process.env.BASE_URL);
     //console.log(imageUrl);
     if (!question && !option) {
-        return response.status(400).send('Input required!');
+        return response.status(400).json({ error: 'Input required!' });
     }
     if (question) {
         await QuizModel.updateOne({ _id: quizID }, {
@@ -149,9 +149,9 @@ router.post('/edit/:id', upload.single('image'), async (request, response) => {
                 }
             });
         }
-        response.status(201).send("Quiz updated with ID: " + quizID);
+        response.status(201).json({ quizID });
     } catch (e) {
-        response.status(501).send(e.message)
+        response.status(501).json({ error: e.message })
     }
 });
 
@@ -162,7 +162,7 @@ router.delete('/delete/:id', async (request, response) => {
         await QuizModel.deleteOne({ _id: request.params.id });
         response.status(202).send("Quiz DELETED with ID: " + request.params.id);
     } catch (e) {
-        response.status(501).send(e.message)
+        response.status(501).json({ error: e.message })
     }
 })
 
