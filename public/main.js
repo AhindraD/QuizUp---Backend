@@ -1,0 +1,1 @@
+const socket = io.connect(location.origin);//("http://localhost:8000/")
