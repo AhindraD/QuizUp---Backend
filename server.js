@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const { Server } = require("socket.io");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -51,7 +51,10 @@ app.use("/quiz", authenticateRequest, quizRouter);
 app.use("/subject", authenticateRequest, subjectRouter); 
 app.use("/teacher", authenticateRequest, teacherRouter); 
 
-app.listen(process.env.PORT || 8000);
+const httpServer = app.listen(process.env.PORT || 8000, () => {
+    const port = httpServer.address().port;
+    console.log(`Server running on ${port}`);
+});
 
 
 //AUTHORIZATION: custom middleware to prevent un-authorized access
@@ -73,3 +76,82 @@ function authenticateRequest(request, response, next) {
         return response.status(401).send("Invalid token provided! ERROR: " + error.message);
     }
 }
+
+
+//SOCKET_IO
+const io = new Server(httpServer);
+let allRooms = {};
+/*
+roomDemoID:{
+    owner: "abc",
+    joiner: "xyz",
+},
+*/
+
+io.on("connection", (socket) => {
+    console.log("Client Connected: ", socket.id);
+    socket.emit("ID", socket.id);
+
+    /*
+        //DISPLAY MSG SYNC
+        socket.on("chat-message", (data) => {
+            console.log(`Message from ${socket.id}: ${data}`);
+            //to deliver to everyone EXcept Sender
+            socket.broadcast.emit("new-message", `Message from ${socket.id}: ${data}`);
+    
+            //too all including sender
+            //io.emit("new-message", `Message from ${socket.id}: ${data}`);
+        });
+        */
+
+
+    //CREATE ROOM
+    socket.on("create-room", (data) => {
+        allRooms[data.roomID] = {
+            owner: data.owner,
+        };
+        socket.join(data.roomID);
+    })
+    //JOIN ROOM
+    socket.on("join-room", (data) => {
+        if (allRooms[data.roomID] !== undefined) {
+            if (allRooms[data.roomID].joiner === undefined) {
+                allRooms[data.roomID].joiner = data.joiner;
+                socket.join(data.roomID);
+
+                socket.emit("join-access", { valid: true, player: "O", resp: "Play on!" });
+
+                setTimeout(() => {
+                    io.to(data.roomID).emit("oponent", allRooms[data.roomID]);
+                }, 100);//delaying to gove time to set the socket on, inside useEffect (frontend) on page load
+
+            }
+            else {
+                console.log("Room Full!");
+                socket.emit("join-access", { valid: false, resp: "Room Full!" });
+            }
+        } else {
+            console.log("Invalid Room!");
+            socket.emit("join-access", { valid: false, resp: "Invalid Room!" });
+        }
+    })
+
+
+    //PLANTING MOVES
+    /*
+    let movesObj = {
+                    arrCopy: JSON.stringify(arrCopy),
+                    ifXturn,
+                    currStatus,
+                    room
+                }
+    */
+    socket.on("moves", (data) => {
+        io.to(data.room).emit("new-moves", data);
+    })
+
+
+    socket.on("disconnect", () => {
+        console.log(`Client Disconnected: `, socket.id);
+    });
+})
