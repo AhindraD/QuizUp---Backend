@@ -56,7 +56,7 @@ router.post('/add', upload.single('image'), async (request, response) => {
     let imageUrl = process.env.BASE_URL + uploadedFile;
     //console.log(process.env.BASE_URL);
     console.log(imageUrl);
-    if (!question || !option || !subject || !owner) {
+    if (!subject || !owner) {
         return response.status(400).json({ error: 'Input required!' });
     }
     //creating document for entered details
