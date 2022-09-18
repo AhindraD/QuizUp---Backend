@@ -56,7 +56,7 @@ router.post('/add', upload.single('image'), async (request, response) => {
     let imageUrl = process.env.BASE_URL + uploadedFile;
     //console.log(process.env.BASE_URL);
     console.log(imageUrl);
-    if (!subject || !owner) {
+    if (!question || !option || !subject || !owner) {
         return response.status(400).json({ error: 'Input required!' });
     }
     //creating document for entered details
@@ -160,7 +160,7 @@ router.delete('/delete/:id', async (request, response) => {
     //console.log(request.params.id);
     try {
         await QuizModel.deleteOne({ _id: request.params.id });
-        response.status(202).send("Quiz DELETED with ID: " + request.params.id);
+        response.status(202).json({ done: `Quiz DELETED with ID: ${request.params.id}`});
     } catch (e) {
         response.status(501).json({ error: e.message })
     }

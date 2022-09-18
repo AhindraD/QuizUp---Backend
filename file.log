@@ -63,3 +63,5 @@
 [0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 117.873 ms - 633[0m
 [0mGET /quiz/6322d6e096a8a3bfdc45db40 [32m200[0m 105.298 ms - 526[0m
 [0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 152.637 ms - 2199[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 145.581 ms - 3210[0m
+[0mGET /subject/6322d6cf96a8a3bfdc45db3b [32m200[0m 120.986 ms - 3105[0m
