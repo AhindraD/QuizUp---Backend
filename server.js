@@ -96,6 +96,7 @@ roomDemoID:{
 io.on("connection", (socket) => {
     console.log("Client Connected: ", socket.id);
     socket.emit("ID", socket.id);
+    console.log(allRooms);
 
     //CREATE ROOM
     socket.on("create-room", (data) => {
@@ -148,6 +149,16 @@ io.on("connection", (socket) => {
 
     socket.on("end-game", (data) => {
         io.to(data.roomID).emit("game-ended", allRooms[data.roomID]);
+    })
+
+    socket.on("erase-all", (data) => {
+        for (let room in allRooms) {
+            if (room.teacher === data.owner) {
+                allRooms = {};
+                break;
+            }
+        }
+        io.to(data.owner).emit("all-erased", allRooms);
     })
 
 
