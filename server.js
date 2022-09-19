@@ -142,15 +142,32 @@ io.on("connection", (socket) => {
     })
 
     socket.on("change-quiz", (data) => {
-        io.to(data.roomID).emit("quiz-changed", data);
+        io.to(data.room).emit("quiz-changed", data);
     })
 
     socket.on("give-answer", (data) => {
-        io.to(data.roomID).emit("student-answered", data);
+        io.to(data.room).emit("student-answered", data);
+    })
+
+    socket.on("submit-all", (data) => {
+        for (let index = 0; index < allRooms[data.room].reportArr.length; index++) {
+            let currStudent = allRooms[data.room].reportArr[index];
+            if (currStudent.studentID === data.studentID) {
+                currStudent.answers = data.answers.slice();
+                for (let j = 0; j < allRooms[data.room].correctAns.length; j++) {
+                    if (allRooms[data.room].correctAns[j] === data.answers[j]) {
+                        allRooms[data.room].reportArr[index].score++;
+                    }
+                }
+                break;
+            }
+        }
+        io.to(data.roomID).emit("student-submitted", data);
     })
 
     socket.on("end-game", (data) => {
-        io.to(data.roomID).emit("game-ended", allRooms[data.roomID]);
+        allRooms[data.room].correctAns = data.correctAns.slice();
+        io.to(data.room).emit("game-ended", allRooms[data.roomID]);
     })
 
     socket.on("erase-all", (data) => {
