@@ -48,8 +48,8 @@ app.use("/auth", authRouter);
 app.use("/student", studentRouter);
 //custom Auth middleware for data protection
 app.use("/quiz", authenticateRequest, quizRouter);
-app.use("/subject", authenticateRequest, subjectRouter); 
-app.use("/teacher", authenticateRequest, teacherRouter); 
+app.use("/subject", authenticateRequest, subjectRouter);
+app.use("/teacher", authenticateRequest, teacherRouter);
 
 const httpServer = app.listen(process.env.PORT || 8000, () => {
     const port = httpServer.address().port;
@@ -83,8 +83,13 @@ const io = new Server(httpServer);
 let allRooms = {};
 /*
 roomDemoID:{
-    owner: "abc",
-    joiner: "xyz",
+            teacher: "abc",
+            roomID: "roomDemoID",
+            subjectID: "subjectID",
+            quizArr: [],
+            studentsArr: [],
+            reportArr: [],
+            status: "started/pending",
 },
 */
 
@@ -92,62 +97,57 @@ io.on("connection", (socket) => {
     console.log("Client Connected: ", socket.id);
     socket.emit("ID", socket.id);
 
-    /*
-        //DISPLAY MSG SYNC
-        socket.on("chat-message", (data) => {
-            console.log(`Message from ${socket.id}: ${data}`);
-            //to deliver to everyone EXcept Sender
-            socket.broadcast.emit("new-message", `Message from ${socket.id}: ${data}`);
-    
-            //too all including sender
-            //io.emit("new-message", `Message from ${socket.id}: ${data}`);
-        });
-        */
-
-
     //CREATE ROOM
     socket.on("create-room", (data) => {
+        //"create-room", { roomID: randomK, owner: socket.id, quizArr: resp.data[0].quiz, subjectID }
         allRooms[data.roomID] = {
-            owner: data.owner,
+            teacher: data.owner,
+            roomID: data.roomID,
+            subjectID: data.subjectID,
+            quizArr: data.quizArr,
+            studentsArr: [],
+            reportArr: [],
+            status: "pending",
         };
         socket.join(data.roomID);
+        io.to(data.owner).emit("room-created", allRooms[data.roomID])
     })
+
     //JOIN ROOM
     socket.on("join-room", (data) => {
+        //"join-room", { roomID, name, joiner: socket.id }
         if (allRooms[data.roomID] !== undefined) {
-            if (allRooms[data.roomID].joiner === undefined) {
-                allRooms[data.roomID].joiner = data.joiner;
-                socket.join(data.roomID);
-
-                socket.emit("join-access", { valid: true, player: "O", resp: "Play on!" });
-
-                setTimeout(() => {
-                    io.to(data.roomID).emit("oponent", allRooms[data.roomID]);
-                }, 100);//delaying to gove time to set the socket on, inside useEffect (frontend) on page load
-
-            }
-            else {
-                console.log("Room Full!");
-                socket.emit("join-access", { valid: false, resp: "Room Full!" });
-            }
+            //console.log("student-connected");
+            allRooms[data.roomID].studentsArr.push(data.name);
+            let newStudent = { student: data.name, studentID: joiner, answers: [], score: 0 }
+            allRooms[data.roomID].reportArr.push(newStudent);
+            socket.join(data.roomID);
+            setTimeout(() => {
+                io.to(data.roomID).emit("room-joined", newStudent);
+            }, 100);//delaying to gove time to set the socket on, inside useEffect (frontend) on page load
         } else {
             console.log("Invalid Room!");
             socket.emit("join-access", { valid: false, resp: "Invalid Room!" });
         }
     })
 
+    //QUIZ_PROCESS
+    socket.on("start-game", (data) => {
+        //"start-game", { roomID }
+        allRooms[data.roomID].status = "started";
+        io.to(data.roomID).emit("game-started", data);
+    })
 
-    //PLANTING MOVES
-    /*
-    let movesObj = {
-                    arrCopy: JSON.stringify(arrCopy),
-                    ifXturn,
-                    currStatus,
-                    room
-                }
-    */
-    socket.on("moves", (data) => {
-        io.to(data.room).emit("new-moves", data);
+    socket.on("change-quiz", (data) => {
+        io.to(data.roomID).emit("quiz-changed", data);
+    })
+
+    socket.on("give-answer", (data) => {
+        io.to(data.roomID).emit("student-answered", data);
+    })
+
+    socket.on("end-game", (data) => {
+        io.to(data.roomID).emit("game-ended", allRooms[data.roomID]);
     })
 
 
