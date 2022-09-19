@@ -121,7 +121,7 @@ io.on("connection", (socket) => {
         if (allRooms[data.roomID] !== undefined) {
             //console.log("student-connected");
             allRooms[data.roomID].studentsArr.push(data.name);
-            let newStudent = { student: data.name, studentID: data.joiner, answers: [], score: 0 }
+            let newStudent = { student: data.name, studentID: data.joiner, answers: [], score: 0, result: [] }
             allRooms[data.roomID].reportArr.push(newStudent);
             socket.join(data.roomID);
             setTimeout(() => {
@@ -157,12 +157,16 @@ io.on("connection", (socket) => {
                 for (let j = 0; j < allRooms[data.room].correctAns.length; j++) {
                     if (allRooms[data.room].correctAns[j] === data.answers[j]) {
                         allRooms[data.room].reportArr[index].score++;
+                        allRooms[data.room].reportArr[index].result[j] = true;
+                    } else {
+                        allRooms[data.room].reportArr[index].result[j] = false;
                     }
                 }
                 break;
             }
+            io.to(data.studentID).emit("get-result", { report: allRooms[data.room].reportArr[index] });
         }
-        io.to(data.roomID).emit("student-submitted", data);
+        io.to(data.room).emit("student-submitted", { report: allRooms[data.room].reportArr });
     })
 
     socket.on("end-game", (data) => {
