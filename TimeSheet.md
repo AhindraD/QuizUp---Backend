@@ -28,10 +28,10 @@ Estimated time: 32hrs
     19 Sept. 2022
     12:00 - 03:30: finshed Quiz edit/add/delete page
     03:30 - 8:00 : Working on socket Backend & Frontend
-    08:30 - 16:00 : Working on socket Backend & Frontend
+    08:30 - 15:30 : Working on socket Backend & Frontend
 
-Milestone 2 completed in around  22 hours  00mins.
+Milestone 2 completed in around  29 hours  00mins.
 
 ### MISC
 19 Sept. 2022
-11.30 - 13.00: Fixed some bugs and UI issues as per the feedback
+15.30 - 16.00: Fixed some bugs and UI issues as per the feedback
