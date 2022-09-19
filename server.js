@@ -120,11 +120,11 @@ io.on("connection", (socket) => {
         if (allRooms[data.roomID] !== undefined) {
             //console.log("student-connected");
             allRooms[data.roomID].studentsArr.push(data.name);
-            let newStudent = { student: data.name, studentID: joiner, answers: [], score: 0 }
+            let newStudent = { student: data.name, studentID: data.joiner, answers: [], score: 0 }
             allRooms[data.roomID].reportArr.push(newStudent);
             socket.join(data.roomID);
             setTimeout(() => {
-                io.to(data.roomID).emit("room-joined", newStudent);
+                io.to(data.roomID).emit("room-joined", { newStudent, students: allRooms[data.roomID].studentsArr });
             }, 100);//delaying to gove time to set the socket on, inside useEffect (frontend) on page load
         } else {
             console.log("Invalid Room!");
