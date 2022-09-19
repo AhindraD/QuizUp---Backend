@@ -13,22 +13,21 @@ These are minimum endpoints needed, feel free to be more creative and add more e
   - `POST /auth/token`
   
 - Quiz
-  - `POST /restaurants/add`: 
+  - `POST /quiz/add`: 
   
-  - `GET /restaurants/all`: 
+  - `POST /quiz/edit/:quizID`: 
   
-  - `GET /restaurants/:id`: 
+  - `GET /quiz/all`: 
   
-  - `POST /restuarants/:id/add-dish`: 
+  - `GET /quiz/:quizID`: 
   
-  - `GET /restaurants/:id/orders`: Get all orders of a restaurant, should be able to filter by passing `?status=pending` etc. (shows all if no filter query passed)
+  - `DELETE /quiz/delete/:quizID
   
-  - `GET /restaurants/:id/revenue?start_date=2022-09-08`: Get revenue of a restaurant for given time range. `end_date` default would be `today`'s date
-  
-- Other
-  - `POST /orders/add`: 
-  - `GET /orders/:id`: 
-  - `POST /orders/:id/update?status=<pending/completed/cancelled>`: Change status of any order by passing the argument in query
+- Subject
+  - `POST /subject/add`: 
+  - `GET /subject/all`: 
+  - `GET /subject/:subID`: 
+  - `DELETE /subject/delete/:subID
 
   <br>
   <br>
