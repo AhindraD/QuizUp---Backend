@@ -96,7 +96,7 @@ roomDemoID:{
 io.on("connection", (socket) => {
     console.log("Client Connected: ", socket.id);
     socket.emit("ID", socket.id);
-    console.log(allRooms);
+    //console.log(allRooms);
 
     //CREATE ROOM
     socket.on("create-room", (data) => {
@@ -150,10 +150,14 @@ io.on("connection", (socket) => {
     })
 
     socket.on("submit-all", (data) => {
+        console.log(data);
         for (let index = 0; index < allRooms[data.room].reportArr.length; index++) {
+
             let currStudent = allRooms[data.room].reportArr[index];
+
             if (currStudent.studentID === data.studentID) {
-                currStudent.answers = data.answers.slice();
+                allRooms[data.room].reportArr[index].answers = data.answers.slice();
+
                 for (let j = 0; j < allRooms[data.room].correctAns.length; j++) {
                     if (allRooms[data.room].correctAns[j] === data.answers[j]) {
                         allRooms[data.room].reportArr[index].score++;
@@ -166,7 +170,7 @@ io.on("connection", (socket) => {
             }
             io.to(data.studentID).emit("get-result", { report: allRooms[data.room].reportArr[index] });
         }
-        io.to(data.room).emit("student-submitted", { report: allRooms[data.room].reportArr });
+        io.to(data.room).emit("student-submitted", { report: allRooms[data.room] });
     })
 
     socket.on("end-game", (data) => {
