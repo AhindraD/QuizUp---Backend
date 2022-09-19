@@ -28,6 +28,7 @@ Estimated time: 32hrs
     19 Sept. 2022
     12:00 - 03:30: finshed Quiz edit/add/delete page
     03:30 - 8:00 : Working on socket Backend & Frontend
+    08:30 - 16:00 : Working on socket Backend & Frontend
 
 Milestone 2 completed in around  22 hours  00mins.
 
