@@ -32,7 +32,7 @@ These are minimum endpoints needed, feel free to be more creative and add more e
   <br>
   <br>
   <br>
-![all requests](https://github.com/AhindraD/UberEats-Backend/blob/master/images/allRequests.PNG?raw=true)
+![all requests](https://github.com/AhindraD/QuizUp---Backend/blob/master/Routes/snap-api.PNG?raw=true)
 ## Tech Stack and Notes
 - ExpressJS
 - MongoDB
