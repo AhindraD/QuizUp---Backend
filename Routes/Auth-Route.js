@@ -75,7 +75,7 @@ router.post("/login", async (request, response) => {
     const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION_TIME });
     REFRESH_TOKENS.push(refreshToken);
 
-    return response.status(202).json({ accessToken, refreshToken, existingUser })
+    return response.status(201).json({ accessToken, refreshToken, existingUser })
 });
 
 //Generate Access token from Refresh Token
@@ -93,7 +93,7 @@ router.post("/token", async (request, response) => {
         const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
         delete payload.exp;
         const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION_TIME });
-        return response.status(202).json({ accessToken });
+        return response.status(200).json({ accessToken });
     } catch (error) {
         return response.status(401).send("ERROR: " + error.message);
     }

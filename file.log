@@ -92,3 +92,17 @@
 [0mGET /uploads/undefined [33m404[0m 0.403 ms - 156[0m
 [0mGET /uploads/undefined [33m404[0m 0.342 ms - 156[0m
 [0mGET /uploads/undefined [33m404[0m 0.330 ms - 156[0m
+[0mPOST /auth/login [32m201[0m 170.450 ms - 1157[0m
+[0mPOST /auth/token [32m200[0m 5.422 ms - 225[0m
+[0mPOST /auth/signup [33m409[0m 45.218 ms - 33[0m
+[0mPOST /auth/login [32m201[0m 133.619 ms - 1157[0m
+[0mPOST /auth/token [32m200[0m 3.035 ms - 225[0m
+[0mPOST /subject/add [33m401[0m 1.099 ms - 42[0m
+[0mPOST /subject/add [32m201[0m 151.172 ms - 49[0m
+[0mPOST /auth/signup [33m409[0m 49.517 ms - 33[0m
+[0mPOST /auth/login [32m201[0m 118.771 ms - 1184[0m
+[0mPOST /auth/login [33m401[0m 137.347 ms - 44[0m
+[0mPOST /auth/login [32m201[0m 123.835 ms - 1184[0m
+[0mPOST /auth/token [32m200[0m 1.031 ms - 225[0m
+[0mGET /subject/all [33m401[0m 0.508 ms - 42[0m
+[0mGET /subject/all [32m200[0m 107.743 ms - 2984[0m
